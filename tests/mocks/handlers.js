@@ -23,4 +23,11 @@ export const handlers = [
       },
     ]);
   }),
+
+  http.post("/user/signup", () => {
+    return HttpResponse.json(
+      [{ msg: "Passwords do not match!" }, { msg: "Username already exists!" }],
+      { status: 400 },
+    );
+  }),
 ];
