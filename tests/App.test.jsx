@@ -1,12 +1,43 @@
-// App.test.jsx
-
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
-import App from "../src/App";
+import routes from "../src/routes";
+import { createMemoryRouter, RouterProvider } from "react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 describe("App component", () => {
-  it("renders correct heading", () => {
-    render(<App />);
-    expect(screen.getByRole("heading").textContent).toMatch(/first test/i);
+  it("renders list of posts", async () => {
+    const router = createMemoryRouter(routes);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>,
+    );
+
+    const firstPost = await screen.findByText(
+      /Its the first post - published/i,
+    );
+    const secondPost = await screen.findByText(
+      /Its the second post - unpublished/i,
+    );
+
+    expect(firstPost).toBeInTheDocument();
+    expect(secondPost).toBeInTheDocument();
+  });
+
+  it("renders button to publish/unpublish post when user is post author", async () => {
+    const router = createMemoryRouter(routes);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>,
+    );
+
+    const firstBtn = await screen.findByRole("button", { name: "Publish" });
+    const secondBtn = await screen.findByRole("button", { name: "Unpublish" });
+
+    expect(firstBtn).toBeInTheDocument();
+    expect(secondBtn).toBeInTheDocument();
   });
 });

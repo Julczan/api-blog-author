@@ -1,9 +1,10 @@
 import "./App.css";
+import PostList from "./PostList/PostList";
 
-function App() {
+function App({ domain }) {
   return (
     <>
-      <h1>First test</h1>
+      <PostList domain={domain} />
     </>
   );
 }
