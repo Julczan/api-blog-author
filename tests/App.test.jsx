@@ -37,18 +37,35 @@ describe("App component", () => {
     expect(login).toBeInTheDocument();
   });
 
-  // it("renders button to publish/unpublish post when user is post author", async () => {
-  //   const router = createMemoryRouter(routes);
-  //   render(
-  //     <QueryClientProvider client={queryClient}>
-  //       <RouterProvider router={router} />
-  //     </QueryClientProvider>,
-  //   );
+  it("renders button to publish/unpublish post when user is post author", async () => {
+    localStorage.setItem("User", "Julczan");
+    const router = createMemoryRouter(routes);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>,
+    );
 
-  //   const firstBtn = await screen.findByRole("button", { name: "Publish" });
-  //   const secondBtn = await screen.findByRole("button", { name: "Unpublish" });
+    const firstBtn = await screen.findByRole("button", { name: "Publish" });
+    const secondBtn = await screen.findByRole("button", { name: "Unpublish" });
 
-  //   expect(firstBtn).toBeInTheDocument();
-  //   expect(secondBtn).toBeInTheDocument();
-  // });
+    expect(firstBtn).toBeInTheDocument();
+    expect(secondBtn).toBeInTheDocument();
+  });
+
+  it("does not render button to publish/unpublish post when user is not post author", async () => {
+    localStorage.setItem("User", "Test");
+    const router = createMemoryRouter(routes);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>,
+    );
+
+    const firstBtn = screen.queryByRole("button", { name: "Publish" });
+    const secondBtn = screen.queryByRole("button", { name: "Unpublish" });
+
+    expect(firstBtn).not.toBeInTheDocument();
+    expect(secondBtn).not.toBeInTheDocument();
+  });
 });

@@ -10,7 +10,11 @@ export const handlers = [
         createdAt: "2026-08-27T19:13:28.303Z",
         updatedAt: "2026-08-27T19:13:28.303Z",
         published: true,
-        authorId: 1,
+        authorId: 7,
+        author: {
+          id: 7,
+          username: "Julczan",
+        },
       },
       {
         id: 2,
@@ -19,7 +23,11 @@ export const handlers = [
         createdAt: "2026-08-27T19:13:28.303Z",
         updatedAt: "2026-08-27T19:13:28.303Z",
         published: false,
-        authorId: 1,
+        authorId: 7,
+        author: {
+          id: 7,
+          username: "Julczan",
+        },
       },
     ]);
   }),

@@ -1,11 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { getPosts } from "../../api/posts";
+import PublishPost from "./PublishPost";
 
 function PostList({ domain }) {
   const { data, status, error } = useQuery({
     queryKey: ["posts", domain],
     queryFn: () => getPosts(domain),
   });
+
+  const user = localStorage.getItem("User");
 
   return (
     <div className="postList">
@@ -14,11 +17,18 @@ function PostList({ domain }) {
       {data &&
         data.map((post) => (
           <div className="post" key={post.id}>
-            <div className="published">{post.isPublished}</div>
+            <div className="post-author">{post.author.username}</div>
             <div className="post-title">{post.title}</div>
             <div className="post-text">{post.text}</div>
             <div className="post-created">{post.createdAt}</div>
             <div className="post-updated">{post.updatedAt}</div>
+            {user === post.author.username && (
+              <PublishPost
+                domain={domain}
+                postId={post.id}
+                published={post.published}
+              />
+            )}
           </div>
         ))}
     </div>
