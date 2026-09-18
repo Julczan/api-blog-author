@@ -16,7 +16,7 @@ function Post({ domain }) {
     <>
       <Navbar />
       {status === "pending" && "Loading..."}
-      {error && <p>{error.message}</p>}
+      {error && <p>{error}</p>}
       {data && (
         <>
           <div className="post" key={data.id}>

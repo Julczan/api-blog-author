@@ -20,7 +20,7 @@ function DeleteCommentForm({ domain, postId, commentId }) {
 
   return (
     <>
-      {mutation.isPending && "Editing comment..."}
+      {mutation.isPending && "Deleting comment..."}
       {mutation.error && <p>{mutation.error}</p>}
       <form name="editCommentForm" onSubmit={onSubmit}>
         <button type="submit" className="btn btn-primary btn-block">

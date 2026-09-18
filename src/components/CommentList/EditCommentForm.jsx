@@ -11,6 +11,7 @@ function EditCommentForm({ domain, postId, commentId, text, setEditing }) {
     mutationFn: (domain, postId, commentId, newText) =>
       editComment(domain, postId, commentId, newText),
     onSuccess: async () => {
+      setEditing("");
       await queryClient.invalidateQueries({ queryKey: ["comments"] });
     },
   });
@@ -23,7 +24,6 @@ function EditCommentForm({ domain, postId, commentId, text, setEditing }) {
     e.preventDefault();
     mutation.mutate({ domain, postId, commentId, newText });
     setNewText("");
-    setEditing("");
   };
 
   return (

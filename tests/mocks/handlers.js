@@ -41,7 +41,13 @@ export const handlers = [
 
   http.get("/author/posts/:postId", ({ params }) => {
     if (params.postId === "3") {
-      return HttpResponse.json({ message: "Post not found" }, { status: 404 });
+      return HttpResponse.json({ error: "Post not found" }, { status: 404 });
+    }
+    if (params.postId === "4") {
+      return HttpResponse.json(
+        { error: "AuthenticationError: Unauthorized" },
+        { status: 401 },
+      );
     }
     return HttpResponse.json({
       id: 1,
@@ -63,5 +69,30 @@ export const handlers = [
       { id: 1, author: { username: "Julek" }, text: "comment" },
       { id: 2, author: { username: "Test" }, text: "Second comment" },
     ]);
+  }),
+
+  http.post("/user/login", () => {
+    return HttpResponse.json(
+      { msg: "Invalid username or password" },
+      { status: 401 },
+    );
+  }),
+
+  http.get("/author/posts/:postId/comments/:commentId", ({ params }) => {
+    if (params.postId !== "1") {
+      return HttpResponse.json({ error: "Comment not found" }, { status: 404 });
+    }
+    if (params.commentId !== "1") {
+      return HttpResponse.json({ error: "Comment not found" }, { status: 404 });
+    }
+    return HttpResponse.json({
+      id: 1,
+      createdAt: "2026-08-28T20:06:28.730Z",
+      updatedAt: "2026-08-28T20:06:28.730Z",
+      author: {
+        username: "Julek",
+      },
+      text: "comment",
+    });
   }),
 ];

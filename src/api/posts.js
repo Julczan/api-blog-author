@@ -19,7 +19,7 @@ export const getPost = async (domain, postId) => {
   });
   if (response.status >= 400) {
     const errorData = await response.json();
-    throw new Error(errorData.message || "An error occurred");
+    return Promise.reject(errorData.error);
   }
   return response.json();
 };

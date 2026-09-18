@@ -15,7 +15,7 @@ function Comment({ domain }) {
     <>
       <Navbar />
       {status === "pending" && "Loading..."}
-      {error && <p>{error.message}</p>}
+      {error && <p>{error}</p>}
       {data && (
         <>
           <div className="comment" key={data.id}>

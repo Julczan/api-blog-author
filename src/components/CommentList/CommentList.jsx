@@ -14,12 +14,10 @@ function CommentList({ domain, postId }) {
     queryFn: () => getComments(domain, postId),
   });
 
-  const user = localStorage.getItem("User");
-
   const navigate = useNavigate();
 
   const handleClick = (postId, commentId) => {
-    navigate(`/posts/${postId}/comments/${commentId}`);
+    navigate(`/author/posts/${postId}/comments/${commentId}`);
   };
 
   if (data && data.length === 0) {
@@ -52,25 +50,26 @@ function CommentList({ domain, postId }) {
                 <button onClick={() => setEditing("")}>Cancel</button>
               </div>
             ) : (
-              <div
-                className="comment"
-                key={comment.id}
-                onClick={() => handleClick(postId, comment.id)}
-              >
-                <div className="comment-author">{comment.author.username}</div>
-                <div className="comment-text">{comment.text}</div>
-                <div className="comment-created">{comment.createdAt}</div>
-                <div className="comment-updated">{comment.updatedAt}</div>
-                {user === comment.author.username && (
-                  <div className="comment-btns">
-                    <button onClick={() => setEditing(comment.id)}>Edit</button>
-                    <DeleteCommentForm
-                      domain={domain}
-                      postId={postId}
-                      commentId={comment.id}
-                    />
+              <div className="comment" key={comment.id}>
+                <div
+                  className="comment-body"
+                  onClick={() => handleClick(postId, comment.id)}
+                >
+                  <div className="comment-author">
+                    {comment.author.username}
                   </div>
-                )}
+                  <div className="comment-text">{comment.text}</div>
+                  <div className="comment-created">{comment.createdAt}</div>
+                  <div className="comment-updated">{comment.updatedAt}</div>
+                </div>
+                <div className="comment-btns">
+                  <button onClick={() => setEditing(comment.id)}>Edit</button>
+                  <DeleteCommentForm
+                    domain={domain}
+                    postId={postId}
+                    commentId={comment.id}
+                  />
+                </div>
               </div>
             ),
           )}

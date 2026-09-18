@@ -1,9 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 import { createMemoryRouter, RouterProvider } from "react-router";
 import routes from "../src/routes";
-import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient({
@@ -45,6 +44,7 @@ describe("Post page", () => {
     const error = await screen.findByText(/Post not found/i);
     expect(error).toBeInTheDocument();
   });
+
   it("renders 'no comments yet' message when there are no comments", async () => {
     const router = createMemoryRouter(routes, {
       initialEntries: ["/posts/2"],
@@ -83,51 +83,32 @@ describe("Post page", () => {
     const comment = await screen.findByRole("form");
     expect(comment).toBeInTheDocument();
   });
-  // it("displays error when unauthenticated user tries to comment a post", async () => {
-  //   const user = userEvent.setup();
-  //   const router = createMemoryRouter(routes, {
-  //     initialEntries: ["/posts/2"],
-  //   });
-  //   render(
-  //     <QueryClientProvider client={queryClient}>
-  //       <RouterProvider router={router} />
-  //     </QueryClientProvider>,
-  //   );
-  //   const commentInput = await screen.findByLabelText("Comment");
-  //   fireEvent.change(commentInput, { target: { value: "test" } });
-  //   const submitBtn = await screen.findByRole("button", { name: "Comment" });
-  //   await user.click(submitBtn);
-  //   const error = await screen.findByText(/AuthenticationError: Unauthorized/i);
-  //   expect(error).toBeInTheDocument();
-  // });
-  // it("renders delete and edit buttons when user is comment author", async () => {
-  //   localStorage.setItem("User", "Julek");
-  //   const router = createMemoryRouter(routes, {
-  //     initialEntries: ["/posts/1"],
-  //   });
-  //   render(
-  //     <QueryClientProvider client={queryClient}>
-  //       <RouterProvider router={router} />
-  //     </QueryClientProvider>,
-  //   );
-  //   const editBtn = await screen.findByRole("button", { name: "Edit" });
-  //   const deleteBtn = await screen.findByRole("button", { name: "Delete" });
-  //   expect(editBtn).toBeInTheDocument();
-  //   expect(deleteBtn).toBeInTheDocument();
-  // });
-  // it("does not render delete and edit buttons when user is not comment author", async () => {
-  //   localStorage.setItem("User", "Someone");
-  //   const router = createMemoryRouter(routes, {
-  //     initialEntries: ["/posts/1"],
-  //   });
-  //   render(
-  //     <QueryClientProvider client={queryClient}>
-  //       <RouterProvider router={router} />
-  //     </QueryClientProvider>,
-  //   );
-  //   const editBtn = screen.queryByRole("button", { name: "Edit" });
-  //   const deleteBtn = screen.queryByRole("button", { name: "Delete" });
-  //   expect(editBtn).not.toBeInTheDocument();
-  //   expect(deleteBtn).not.toBeInTheDocument();
-  // });
+  it("displays error when unauthenticated user tries to see a post", async () => {
+    const router = createMemoryRouter(routes, {
+      initialEntries: ["/posts/4"],
+    });
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>,
+    );
+
+    const error = await screen.findByText(/AuthenticationError: Unauthorized/i);
+    expect(error).toBeInTheDocument();
+  });
+
+  it("renders delete and edit buttons on each comment", async () => {
+    const router = createMemoryRouter(routes, {
+      initialEntries: ["/posts/1"],
+    });
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>,
+    );
+    const editBtn = await screen.findAllByRole("button", { name: "Edit" });
+    const deleteBtn = await screen.findAllByRole("button", { name: "Delete" });
+    expect(editBtn).toHaveLength(2);
+    expect(deleteBtn).toHaveLength(2);
+  });
 });
