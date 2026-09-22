@@ -15,7 +15,10 @@ function DeleteCommentForm({ domain, postId, commentId }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    mutation.mutate({ domain, postId, commentId });
+    const result = confirm("Do you want to delete the comment?");
+    if (result) {
+      mutation.mutate({ domain, postId, commentId });
+    }
   };
 
   return (
