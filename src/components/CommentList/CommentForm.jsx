@@ -27,7 +27,8 @@ function CommentForm({ domain, postId }) {
   return (
     <>
       {mutation.isPending && "Adding comment..."}
-      {mutation.error && <p>{mutation.error}</p>}
+      {mutation.error &&
+        mutation.error.map((err) => <p key={err.msg}>{err.msg}</p>)}
       <form name="commentForm" onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="comment">Comment</label>

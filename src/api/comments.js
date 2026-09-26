@@ -36,7 +36,7 @@ export const addComment = async ({ domain, postId, text }) => {
   });
   if (response.status >= 400) {
     const errorData = await response.json();
-    return Promise.reject(errorData.error);
+    return Promise.reject(errorData);
   }
   return response.json();
 };
@@ -55,7 +55,7 @@ export const editComment = async ({ domain, postId, commentId, newText }) => {
   );
   if (response.status >= 400) {
     const errorData = await response.json();
-    return Promise.reject(errorData.error);
+    return Promise.reject(errorData);
   }
   return response.json();
 };

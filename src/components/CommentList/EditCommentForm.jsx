@@ -29,7 +29,8 @@ function EditCommentForm({ domain, postId, commentId, text, setEditing }) {
   return (
     <>
       {mutation.isPending && "Editing comment..."}
-      {mutation.error && <p>{mutation.error}</p>}
+      {mutation.error &&
+        mutation.error.map((err) => <p key={err.msg}>{err.msg}</p>)}
       <form name="editCommentForm" onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="comment">Comment</label>
