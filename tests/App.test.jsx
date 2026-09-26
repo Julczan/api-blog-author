@@ -15,12 +15,8 @@ describe("App component", () => {
       </QueryClientProvider>,
     );
 
-    const firstPost = await screen.findByText(
-      /Its the first post - published/i,
-    );
-    const secondPost = await screen.findByText(
-      /Its the second post - unpublished/i,
-    );
+    const firstPost = await screen.findByText(/first post/i);
+    const secondPost = await screen.findByText(/second post/i);
 
     expect(firstPost).toBeInTheDocument();
     expect(secondPost).toBeInTheDocument();

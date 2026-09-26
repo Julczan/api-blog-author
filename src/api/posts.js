@@ -37,3 +37,19 @@ export const publishPost = async ({ domain, postId }) => {
   }
   return response.json();
 };
+
+export const addPost = async ({ domain, title, text }) => {
+  const response = await fetch(`${domain}/posts`, {
+    method: "POST",
+    body: JSON.stringify({ title: title, text: text }),
+    headers: {
+      "Content-type": "application/json",
+      Authorization: localStorage.getItem("Authorization"),
+    },
+  });
+  if (response.status >= 400) {
+    const errorData = await response.json();
+    return Promise.reject(errorData);
+  }
+  return response.json();
+};

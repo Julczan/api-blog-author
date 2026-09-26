@@ -37,7 +37,7 @@ function CommentForm({ domain, postId }) {
             value={text}
             onChange={handleChange}
             placeholder="coolcoder99"
-            type="textarea"
+            type="text"
             autoComplete="no"
             required
           />

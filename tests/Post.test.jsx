@@ -111,4 +111,17 @@ describe("Post page", () => {
     expect(editBtn).toHaveLength(2);
     expect(deleteBtn).toHaveLength(2);
   });
+
+  it("renders form to add a post", () => {
+    const router = createMemoryRouter(routes, {
+      initialEntries: ["/posts/add"],
+    });
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>,
+    );
+    const form = screen.getByRole("form");
+    expect(form).toBeInTheDocument();
+  });
 });
