@@ -17,7 +17,7 @@ function CommentList({ domain, postId }) {
   const navigate = useNavigate();
 
   const handleClick = (postId, commentId) => {
-    navigate(`/author/posts/${postId}/comments/${commentId}`);
+    navigate(`/posts/${postId}/comments/${commentId}`);
   };
 
   if (data && data.length === 0) {

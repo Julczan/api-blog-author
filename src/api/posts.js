@@ -53,3 +53,19 @@ export const addPost = async ({ domain, title, text }) => {
   }
   return response.json();
 };
+
+export const updatePost = async ({ domain, postId, title, text }) => {
+  const response = await fetch(`${domain}/posts/${postId}`, {
+    method: "PUT",
+    body: JSON.stringify({ title: title, text: text }),
+    headers: {
+      "Content-type": "application/json",
+      Authorization: localStorage.getItem("Authorization"),
+    },
+  });
+  if (response.status >= 400) {
+    const errorData = await response.json();
+    return Promise.reject(errorData);
+  }
+  return response.json();
+};

@@ -8,7 +8,6 @@ function PostForm({ domain }) {
   const editorRef = useRef(null);
 
   const [title, setTitle] = useState("");
-  //   const [text, setText] = useState("");
   const navigate = useNavigate();
 
   const mutation = useMutation({
@@ -24,10 +23,6 @@ function PostForm({ domain }) {
     setTitle(e.target.value);
   };
 
-  //   const handleTextChange = (e) => {
-  //     setText(e.target.value);
-  //   };
-
   const queryClient = useQueryClient();
 
   function onSubmit(e) {
@@ -41,8 +36,9 @@ function PostForm({ domain }) {
   return (
     <>
       {mutation.isPending && "Adding comment..."}
-      {mutation.error &&
-        mutation.error.map((err) => <p key={err.msg}>{err.msg}</p>)}
+      {mutation.error && <p>{mutation.error}</p>}
+      {/* {mutation.error &&
+        mutation.error.map((err) => <p key={err.msg}>{err.msg}</p>)} */}
       <form name="postForm" onSubmit={onSubmit}>
         <input
           id="title"
@@ -54,16 +50,6 @@ function PostForm({ domain }) {
           autoComplete="no"
           required
         />
-        {/* <textarea
-          id="text"
-          name="text"
-          value={text}
-          onChange={handleTextChange}
-          placeholder="coolcoder99"
-          type="text"
-          autoComplete="no"
-          required
-        /> */}
 
         <Editor
           tinymceScriptSrc="/tinymce/tinymce.min.js"
