@@ -6,6 +6,7 @@ import CommentList from "../CommentList/CommentList";
 import parse from "html-react-parser";
 import { useState } from "react";
 import UpdatePostForm from "./UpdatePostForm";
+import DeletePostForm from "./DeletePostForm";
 
 function Post({ domain }) {
   const { postId } = useParams();
@@ -41,6 +42,7 @@ function Post({ domain }) {
               <div className="post-updated">{data.updatedAt}</div>
             </div>
             <button onClick={() => setIsEditing(true)}>Edit Post</button>
+            <DeletePostForm domain={domain} postId={postId} />
             <CommentList domain={domain} postId={postId} />
           </>
         ))}

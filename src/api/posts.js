@@ -69,3 +69,18 @@ export const updatePost = async ({ domain, postId, title, text }) => {
   }
   return response.json();
 };
+
+export const deletePost = async ({ domain, postId }) => {
+  const response = await fetch(`${domain}/posts/${postId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: localStorage.getItem("Authorization"),
+    },
+  });
+  if (response.status >= 400) {
+    const errorData = await response.json();
+    return Promise.reject(errorData);
+  }
+  return response.json();
+};
