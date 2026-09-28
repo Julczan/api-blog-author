@@ -36,9 +36,12 @@ function PostForm({ domain }) {
   return (
     <>
       {mutation.isPending && "Adding comment..."}
-      {mutation.error && <p>{mutation.error}</p>}
-      {/* {mutation.error &&
-        mutation.error.map((err) => <p key={err.msg}>{err.msg}</p>)} */}
+      {mutation.error &&
+        (Array.isArray(mutation.error) ? (
+          mutation.error.map((err) => <p key={err.msg}>{err.msg}</p>)
+        ) : (
+          <p>{mutation.error.error}</p>
+        ))}
       <form name="postForm" onSubmit={onSubmit}>
         <input
           id="title"
@@ -87,6 +90,9 @@ function PostForm({ domain }) {
           }}
         />
         <button type="submit">Submit</button>
+        <button onClick={() => navigate("/")} type="button">
+          Cancel
+        </button>
       </form>
     </>
   );

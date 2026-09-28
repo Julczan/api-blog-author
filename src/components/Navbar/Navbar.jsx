@@ -15,6 +15,7 @@ function Navbar() {
     return (
       <nav>
         <Link to={"/"}>Home</Link>
+        <Link to={"/posts/add"}>Add post</Link>
         <button onClick={handleSignOut}>Sign Out</button>
       </nav>
     );
