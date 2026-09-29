@@ -80,7 +80,7 @@ describe("Post page", () => {
         <RouterProvider router={router} />
       </QueryClientProvider>,
     );
-    const comment = await screen.findByRole("form");
+    const comment = await screen.findByRole("form", { name: "commentForm" });
     expect(comment).toBeInTheDocument();
   });
   it("displays error when unauthenticated user tries to see a post", async () => {

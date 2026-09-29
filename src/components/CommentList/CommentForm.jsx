@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { addComment } from "../../api/comments";
+import styles from "./CommentForm.module.css";
 
 function CommentForm({ domain, postId }) {
   const [text, setText] = useState("");
@@ -25,30 +26,44 @@ function CommentForm({ domain, postId }) {
   };
 
   return (
-    <>
-      {mutation.isPending && "Adding comment..."}
+    <div className={styles.container}>
       {mutation.error &&
-        mutation.error.map((err) => <p key={err.msg}>{err.msg}</p>)}
-      <form name="commentForm" onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="comment">Comment</label>
-          <input
+        (Array.isArray(mutation.error) ? (
+          mutation.error.map((err) => (
+            <p className={styles.errorMsg} key={err.msg}>
+              {err.msg}
+            </p>
+          ))
+        ) : (
+          <p className={styles.errorMsg}>{mutation.error.error}</p>
+        ))}
+
+      <form className={styles.form} name="commentForm" onSubmit={onSubmit}>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="comment">
+            Leave a comment
+          </label>
+          <textarea
+            className={styles.textarea}
             id="comment"
             name="comment"
             value={text}
             onChange={handleChange}
-            placeholder="coolcoder99"
-            type="text"
-            autoComplete="no"
+            placeholder="What are your thoughts?"
             required
+            disabled={mutation.isPending}
           />
         </div>
 
-        <button type="submit" className="btn btn-primary btn-block">
-          Comment
+        <button
+          type="submit"
+          className={styles.button}
+          disabled={mutation.isPending}
+        >
+          {mutation.isPending ? "Posting..." : "Post Comment"}
         </button>
       </form>
-    </>
+    </div>
   );
 }
 

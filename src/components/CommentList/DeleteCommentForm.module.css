@@ -1,0 +1,39 @@
+/* Keeps the form from breaking the flexbox layout in the comment footer */
+.form {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* Styles the button as a subtle text link that turns red on hover */
+.deleteBtn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.deleteBtn:hover:not(:disabled) {
+  color: #ef4444; /* Destructive red */
+}
+
+.deleteBtn:active:not(:disabled) {
+  color: #b91c1c;
+}
+
+.deleteBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.errorMsg {
+  color: var(--error-text);
+  font-size: 0.75rem;
+  font-style: italic;
+}

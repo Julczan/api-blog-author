@@ -1,7 +1,8 @@
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
 import Navbar from "../Navbar/Navbar";
 import { useQuery } from "@tanstack/react-query";
 import { getComment } from "../../api/comments";
+import styles from "./Comment.module.css";
 
 function Comment({ domain }) {
   const { postId, commentId } = useParams();
@@ -14,19 +15,37 @@ function Comment({ domain }) {
   return (
     <>
       <Navbar />
-      {status === "pending" && "Loading..."}
-      {error && <p>{error}</p>}
-      {data && (
-        <>
-          <div className="comment" key={data.id}>
-            <div className="comment-title">{data.title}</div>
-            <div className="comment-author">{data.author.username}</div>
-            <div className="comment-text">{data.text}</div>
-            <div className="comment-created">{data.createdAt}</div>
-            <div className="comment-updated">{data.updatedAt}</div>
-          </div>
-        </>
-      )}
+
+      <main className={styles.container}>
+        <div className={styles.navBar}>
+          <Link to={`/posts/${postId}`} className={styles.backLink}>
+            &larr; Back to Post
+          </Link>
+        </div>
+
+        {status === "pending" && (
+          <div className={styles.loadingMsg}>Loading comment...</div>
+        )}
+
+        {error && <div className={styles.errorMsg}>{error}</div>}
+
+        {data && (
+          <article className={styles.commentCard} key={data.id}>
+            <header className={styles.header}>
+              <div className={styles.author}>{data.author.username}</div>
+              <div className={styles.date}>{data.createdAt}</div>
+            </header>
+
+            <div className={styles.text}>{data.text}</div>
+
+            {data.updatedAt && (
+              <footer className={styles.footer}>
+                Updated: {data.updatedAt}
+              </footer>
+            )}
+          </article>
+        )}
+      </main>
     </>
   );
 }
