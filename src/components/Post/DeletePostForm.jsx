@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deletePost } from "../../api/posts";
 import { useNavigate } from "react-router";
+import styles from "./DeletePostForm.module.css";
 
 function DeletePostForm({ domain, postId }) {
   const queryClient = useQueryClient();
-
   const navigate = useNavigate();
 
   const mutation = useMutation({
@@ -18,22 +18,30 @@ function DeletePostForm({ domain, postId }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const result = confirm("Do you want to delete the post?");
+    const result = window.confirm(
+      "Are you sure you want to delete this post? This action cannot be undone.",
+    );
     if (result) {
       mutation.mutate({ domain, postId });
     }
   };
 
   return (
-    <>
-      {mutation.isPending && "Deleting comment..."}
-      {mutation.error && <p>{mutation.error.error}</p>}
-      <form name="editCommentForm" onSubmit={onSubmit}>
-        <button type="submit" className="btn btn-primary btn-block">
-          Delete Post
-        </button>
-      </form>
-    </>
+    <form className={styles.form} name="deletePostForm" onSubmit={onSubmit}>
+      {mutation.error && (
+        <span className={styles.errorMsg}>
+          {mutation.error.error || mutation.error.message}
+        </span>
+      )}
+
+      <button
+        type="submit"
+        className={styles.deleteBtn}
+        disabled={mutation.isPending}
+      >
+        {mutation.isPending ? "Deleting..." : "Delete Post"}
+      </button>
+    </form>
   );
 }
 

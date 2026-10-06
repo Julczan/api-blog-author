@@ -1,0 +1,135 @@
+.container {
+  max-width: 680px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden; /* Ensures the hover states don't break outside the rounded corners */
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: #3f3f46;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* The clickable area of the card */
+.cardBody {
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cardBody:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.author {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent-light);
+  overflow-wrap: anywhere;
+}
+
+.date {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.title {
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+.updated {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* Footer bar for author controls */
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Aligns the Publish control to the right */
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid var(--border-color);
+}
+
+/* Status Messages */
+.emptyMsg {
+  text-align: center;
+  margin-top: 4rem;
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+}
+
+.loadingMsg {
+  padding: 1rem;
+  color: var(--accent-light);
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.errorMsg {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--error-bg);
+  border: 1px solid var(--error-border);
+  border-radius: 8px;
+  color: var(--error-text);
+  text-align: center;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 480px) {
+  .container {
+    margin: 1rem auto;
+  }
+
+  .cardBody {
+    padding: 1.25rem 1rem;
+  }
+
+  .actions {
+    padding: 0.75rem 1rem;
+  }
+
+  .title {
+    font-size: 1.125rem;
+  }
+}

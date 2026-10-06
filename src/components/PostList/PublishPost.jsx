@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { publishPost } from "../../api/posts";
+import styles from "./PublishPost.module.css";
 
 function PublishPost({ domain, postId, published }) {
   const queryClient = useQueryClient();
@@ -12,26 +13,28 @@ function PublishPost({ domain, postId, published }) {
     },
   });
 
+  const handleToggle = () => {
+    mutation.mutate({ domain, postId });
+  };
+
   return (
-    <>
-      {published ? (
-        <button
-          onClick={() => {
-            mutation.mutate({ domain, postId });
-          }}
-        >
-          Unpublish
-        </button>
-      ) : (
-        <button
-          onClick={() => {
-            mutation.mutate({ domain, postId });
-          }}
-        >
-          Publish
-        </button>
-      )}
-    </>
+    <div className={styles.container}>
+      {mutation.error && <span className={styles.errorMsg}>Update failed</span>}
+
+      <button
+        onClick={handleToggle}
+        disabled={mutation.isPending}
+        className={published ? styles.unpublishBtn : styles.publishBtn}
+      >
+        {mutation.isPending
+          ? published
+            ? "Unpublishing..."
+            : "Publishing..."
+          : published
+            ? "Unpublish"
+            : "Publish"}
+      </button>
+    </div>
   );
 }
 

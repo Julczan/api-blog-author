@@ -1,0 +1,56 @@
+/* Keeps the form inline so it sits perfectly next to the Edit button */
+.form {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* Styled as a destructive outline button to match the Edit button's shape */
+.deleteBtn {
+  background-color: transparent;
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.deleteBtn:hover:not(:disabled) {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #fca5a5;
+}
+
+.deleteBtn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.deleteBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  border-color: #7f1d1d;
+  color: #991b1b;
+}
+
+.errorMsg {
+  color: var(--error-text);
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 480px) {
+  .form {
+    display: flex; /* Switches from inline-flex to block-level flex */
+    width: 100%;
+  }
+
+  .deleteBtn {
+    width: 100%; /* Stretches the button to match the Edit button */
+    text-align: center;
+    padding: 0.75rem;
+  }
+}

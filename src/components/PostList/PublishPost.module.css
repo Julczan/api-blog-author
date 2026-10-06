@@ -1,0 +1,66 @@
+/* Sits cleanly inside the actions footer of the PostList card */
+.container {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Primary action for drafting/publishing posts */
+.publishBtn {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease,
+    opacity 0.2s ease;
+}
+
+.publishBtn:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+}
+
+.publishBtn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Secondary/Muted action for already published posts */
+.unpublishBtn {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.unpublishBtn:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border-color: #52525b;
+}
+
+.unpublishBtn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Shared disabled state */
+.publishBtn:disabled,
+.unpublishBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.errorMsg {
+  color: var(--error-text);
+  font-size: 0.75rem;
+  font-style: italic;
+}

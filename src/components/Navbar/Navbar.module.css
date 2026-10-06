@@ -1,0 +1,117 @@
+/* Sticks the navbar to the top and gives it a subtle border */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--bg-main);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.homeLink {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.homeLink:hover {
+  color: var(--accent-light);
+  text-decoration: none;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.link {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: var(--text-primary);
+}
+
+/* Primary call to action (Sign Up / Add Post) */
+.primaryLink {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.primaryLink:hover {
+  background-color: var(--accent-hover);
+  color: #ffffff;
+}
+
+.primaryLink:active {
+  transform: scale(0.98);
+}
+
+/* Subtle outline button for signing out */
+.signOutBtn {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.signOutBtn:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border-color: #52525b;
+}
+
+.signOutBtn:active {
+  transform: scale(0.98);
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column; /* Stacks brand on top of links */
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .navLinks {
+    width: 100%;
+    justify-content: stretch; /* Forces links to fill the bottom row */
+    gap: 0.5rem;
+  }
+
+  .primaryLink,
+  .signOutBtn,
+  .link {
+    flex: 1; /* Makes the buttons equal width */
+    text-align: center;
+    padding: 0.6rem 0.5rem;
+    font-size: 0.875rem;
+  }
+}

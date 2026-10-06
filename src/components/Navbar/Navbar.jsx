@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import { signOut } from "../../api/signOut";
+import styles from "./Navbar.module.css";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -11,21 +12,35 @@ function Navbar() {
     navigate("/");
   };
 
-  if (localStorageToken) {
-    return (
-      <nav>
-        <Link to={"/"}>Home</Link>
-        <Link to={"/posts/add"}>Add post</Link>
-        <button onClick={handleSignOut}>Sign Out</button>
-      </nav>
-    );
-  }
-
   return (
-    <nav>
-      <Link to={"/"}>Home</Link>
-      <Link to={"/signup"}>Sign up</Link>
-      <Link to={"/login"}>Login</Link>
+    <nav className={styles.navbar}>
+      <div className={styles.brand}>
+        <Link to={"/"} className={styles.homeLink}>
+          Home
+        </Link>
+      </div>
+
+      <div className={styles.navLinks}>
+        {localStorageToken ? (
+          <>
+            <Link className={styles.primaryLink} to={"/posts/add"}>
+              Add Post
+            </Link>
+            <button className={styles.signOutBtn} onClick={handleSignOut}>
+              Sign Out
+            </button>
+          </>
+        ) : (
+          <>
+            <Link className={styles.link} to={"/login"}>
+              Login
+            </Link>
+            <Link className={styles.primaryLink} to={"/signup"}>
+              Sign up
+            </Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 }
