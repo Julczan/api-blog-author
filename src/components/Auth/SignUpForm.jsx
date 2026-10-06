@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { signUp } from "../../api/signUp";
 import styles from "./SignUpForm.module.css";
 
@@ -9,10 +9,14 @@ function SignUpForm({ domain }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
   const mutation = useMutation({
     mutationKey: ["signup", domain],
     mutationFn: (domain, formdata) => signUp(domain, formdata),
+    onSuccess: () => {
+      navigate("/login");
+    },
   });
 
   const handleSubmit = (e) => {
