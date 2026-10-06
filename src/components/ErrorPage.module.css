@@ -1,0 +1,77 @@
+/* Centers everything in the middle of the viewport */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh; /* Takes up most of the screen */
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.content {
+  text-align: center;
+  max-width: 500px;
+}
+
+.errorCode {
+  font-size: 8rem;
+  font-weight: 800;
+  color: var(--accent-color);
+  margin: 0;
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 1rem 0;
+}
+
+.message {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+/* Styled to look like the primary buttons from your forms */
+.homeLink {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: #ffffff;
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.homeLink:hover {
+  background-color: var(--accent-hover);
+  color: #ffffff; /* Overrides the global anchor hover from index.css */
+  text-decoration: none;
+}
+
+.homeLink:active {
+  transform: scale(0.98);
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 480px) {
+  .errorCode {
+    font-size: 6rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .message {
+    font-size: 1rem;
+  }
+}

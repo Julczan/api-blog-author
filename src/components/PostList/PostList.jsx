@@ -23,15 +23,13 @@ function PostList({ domain }) {
       {error && <p>{error}</p>}
       {data &&
         data.map((post) => (
-          <div
-            className="post"
-            key={post.id}
-            onClick={() => handleCLick(post.id)}
-          >
-            <div className="post-author">{post.author.username}</div>
-            <div className="post-title">{post.title}</div>
-            <div className="post-created">{post.createdAt}</div>
-            <div className="post-updated">{post.updatedAt}</div>
+          <div className="post" key={post.id}>
+            <div className="post-body" onClick={() => handleCLick(post.id)}>
+              <div className="post-author">{post.author.username}</div>
+              <div className="post-title">{post.title}</div>
+              <div className="post-created">{post.createdAt}</div>
+              <div className="post-updated">{post.updatedAt}</div>
+            </div>
             {user === post.author.username && (
               <PublishPost
                 domain={domain}

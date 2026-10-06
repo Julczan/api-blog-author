@@ -80,7 +80,7 @@ describe("Post page", () => {
         <RouterProvider router={router} />
       </QueryClientProvider>,
     );
-    const comment = await screen.findByRole("form", { name: "commentForm" });
+    const comment = await screen.findByLabelText("Leave a comment");
     expect(comment).toBeInTheDocument();
   });
   it("displays error when unauthenticated user tries to see a post", async () => {
@@ -107,7 +107,9 @@ describe("Post page", () => {
       </QueryClientProvider>,
     );
     const editBtn = await screen.findAllByRole("button", { name: "Edit" });
-    const deleteBtn = await screen.findAllByRole("button", { name: "Delete" });
+    const deleteBtn = await screen.findAllByRole("button", {
+      name: "Delete comment",
+    });
     expect(editBtn).toHaveLength(2);
     expect(deleteBtn).toHaveLength(2);
   });

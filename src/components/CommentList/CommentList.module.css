@@ -1,0 +1,151 @@
+.container {
+  margin-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.formWrapper {
+  margin-bottom: 2.5rem;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Base comment card */
+.comment {
+  background-color: var(--bg-main); /* Slightly darker than the post card */
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* The clickable portion of the comment */
+.commentBody {
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.commentBody:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.commentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.author {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--accent-light);
+  overflow-wrap: anywhere;
+}
+
+.date {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.text {
+  font-size: 1rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+
+.updated {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+  font-style: italic;
+}
+
+/* Edit/Delete Actions Bar */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid var(--border-color);
+}
+
+/* Target both the Edit button and any buttons inside DeleteCommentForm */
+.editBtn,
+.actions button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.editBtn:hover {
+  color: var(--accent-light);
+}
+
+/* Edit Form Wrapper & Cancel Button */
+.editWrapper {
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.cancelBtn {
+  margin-top: 1rem;
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid #52525b;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelBtn:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+/* Status Messages */
+.emptyMsg {
+  color: var(--text-secondary);
+  font-style: italic;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.loadingMsg,
+.errorMsg {
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.loadingMsg {
+  color: var(--accent-light);
+}
+.errorMsg {
+  color: var(--error-text);
+}
